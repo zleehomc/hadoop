@@ -1,4 +1,4 @@
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+若公式显示不正常，安装[GitHub with MathJax](https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima/related?utm_source=chrome-app-launcher-info-dialog).
 # High efficiency and quality: large graphs matching
 ## Local node similarity
 ### $S_l$:local节点相似度
