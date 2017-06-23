@@ -73,6 +73,8 @@ $S_2$:图$G_2$的A匹配的节点
 
 ```
 Algorithm 2 anchor-selection (G1, G2)
+Require: two graphs G1 and G2;
+Ensure: a list of matched anchor pairs A;
 
 1: compute the similarity matrix S;
 2: A ← ∅; S1 ← ∅; S2 ← ∅;
@@ -88,6 +90,8 @@ M:最终求的结果，初始状态为A
 $N(u),N(v)$：分别是$G_1,G_2$的直接邻居
 ```
 Algorithm 3 anchor-expansion (G1, G2, A)
+Require: two graphs, G1 and G2, and the anchor pairs A;
+Ensure: a graph matching M;
 
 1: M ← A; Q ← ∅; S1 ← ∅; S2 ← ∅;
 2: for all (u, v) ∈ A do
@@ -103,6 +107,22 @@ Algorithm 3 anchor-expansion (G1, G2, A)
 
 ### 5.3 Discussion on τ for anchor selection
 τ的选择很重要，因为τ如果过大，初始匹配点过少，很难匹配，如果τ过小，初始点过多，存在错误的初始匹配的几率就越大，根据错误的匹配的匹配错误率更大。所以采用算法4步进的方法调整τ，找到一个最优值，由于这个步进的方法Anchor Selection已经完成，主要是完成Anchor-Expansion步骤，并且通过table可以看出，Anchor-Expansion的占用的时间是少数的，所以这个步进方法占用了很少的时间。
+```
+Algorithm 4 construct-opt (G1, G2)
+Require: two graphs, G1 and G2;
+Ensure: a graph matching between G1 and G2;
+
+1: τ ← 0.5; Mopt ← ∅;
+2: AI ←anchor-selection (G1,G2); {Algorithm 2}
+3: for all τi = 0.5 + i × l such that τi ∈ [0.5, 1] do
+4: A ← {(u, v)|(u, v) ∈ AI , S[u, v] ≥ τi};
+5: M ← anchor-expansion (G1, G2, A); {Algorithm 3}
+6: if score(M) > score(Mopt) then
+7: Mopt ← M;
+8: return Mopt ;
+```
+时间复杂度$O(|V(G_1)|^2 · (|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| +|E(G_2)|))$
+
 
 ## 6 Matching refinement
 ### 6.1 Vertex cover based refinement
