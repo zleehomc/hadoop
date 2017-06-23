@@ -56,8 +56,8 @@ $$S_l[u,v]=\frac{(n_{min}+1+D(u,v))^2}{(|V(G_u^k)|+|E(G_u^k)|(|V(G_v^k)+|E(G_v^k
 $$D(u,v)=\frac{min\{d(u),d(v)\}+\sum_{i=1}^{n_{min}}min\{d_{1,i},d_{2,i}\}}{2}\tag{5}$$
 
 ## 5.2 Anchor selection and expansion
-
-### Anchor two conditions
+### Anchor Selection
+#### Anchor two conditions
 1. $min\lbrace d(u),d(v)\rbrace\ge\delta$(两个节点中平均度数更大的那个)
     $$\delta = max\left\lbrace \frac{2\times|E(G_1)|}{|V(G_1)|},\frac{2\times|E(G_2)|}{|V(G_2)|}\right\rbrace$$
 2. $S_l[u,v]\ge τ$ τ是阈值，往往大于0.5
@@ -77,8 +77,27 @@ Algorithm 2 anchor-selection (G1, G2)
 4: if S[u, v] ≥ τ and min{d(u), d(v)} ≥ δ and u ∈/ S1 and v /∈ S2 then
 5: A ← A ∪ {(u, v)}; S1 ← S1 ∪ {u}; S2 ← S2 ∪ {v};
 
-时间复杂度$O(|V(G_1)|^2 · (|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| + |E(G_2)|))$
 ```
+时间复杂度$O(|V(G_1)|^2·(|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| + |E(G_2)|))$
+### Anchor Expansion
+M:最终求的结果，初始状态为A
+
+$N(u),N(v)$：分别是$G_1,G_2$的直接邻居
+```
+Algorithm 3 anchor-expansion (G1, G2, A)
+
+1: M ← A; Q ← ∅; S1 ← ∅; S2 ← ∅;
+2: for all (u, v) ∈ A do
+3: S1 ← S1 ∪ {u}; S2 ← S2 ∪ {v}; Q ← Q ∪ (N(u) × N(v));
+4: while Q not equl ∅ do
+5: remove (u, v) from Q with the largest similarity Sl[u, v];
+6: if u ∈/ S1 and v /∈ S2 then
+7: M ← M ∪ {(u, v)}; S1 ← S1 ∪ {u}; S2 ← S2 ∪ {v}; Q ← Q ∪ (N(u) × N(v));
+8: return M;
+
+```
+时间复杂度$O(|V(G_1)|·|V(G_2)| · min{|V(G_1)|, |V(G_2)|})$
+
 
 ## Vertex cover based refinement
 ### M:初始匹配节点集
