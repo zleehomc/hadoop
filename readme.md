@@ -65,7 +65,7 @@ Anchor two conditions
 
 2. $S_l[u,v]\ge τ$ τ是阈值，往往大于0.5
 
-Anchor:一组集合，用A表示
+Anchor:一组集合，用$\mathcal{A}$表示
 
 $S_1$:图$G_1$的A匹配的节点
 
@@ -85,7 +85,7 @@ Ensure: a list of matched anchor pairs A;
 ```
 时间复杂度$O(|V(G_1)|^2·(|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| + |E(G_2)|))$
 #### Anchor Expansion
-M:最终求的结果，初始状态为A
+M:最终求的结果，初始状态为$\mathcal{A}$
 
 $N(u),N(v)$：分别是$G_1,G_2$的直接邻居
 ```
@@ -121,31 +121,60 @@ Ensure: a graph matching between G1 and G2;
 7: Mopt ← M;
 8: return Mopt ;
 ```
-时间复杂度$O(|V(G_1)|^2 · (|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| +|E(G_2)|))$
+时间复杂度$O(|V(G_1)|^2 · (|V(G_1)|+|E(G_1)|) + |V(G_2)|^2 · (|V(G_2)| +|E(G_2)|))v$
 
 
 ## 6 Matching refinement
 ### 6.1 Vertex cover based refinement
+
+![](https://ooo.0o0.ooo/2017/06/24/594e0e0e20547.png)
+
 M:初始匹配节点集
 
 C:包含图G中最少的节点的集合，且对于G中的每条边，至少覆盖一个边上一个节点.
 
-I:I=V(G)-C I是V(G)的子集，并且对于任意的两个节点属于I，这两个节点之间的边都不属于
+I:I=V(G)-C I是V(G)的子集，并且对于任意的两个节点属于I，这两个节点之间的边都不属于E(G)
 
 P:P1,P2分别是G1，G2中匹配的节点的集合
 
 F:$C \cap P $
+### 6.2 Refinement and its optimality
 
 $G_b$:$V(G_1)-C$ 和$V(G_2)-F2$的二分图
 
-w(u,v):(u,v)的权重
+$w(u,v)=|M[N(u) \cap F_1] \cap (N(v) \cap F_2)|$：$G_b$的匹配的边的权重
 
-$M_b$:二分图的最大权重
+$M_b$:二分图的最大权重下的匹配节点集合
 
-$M^+(C)=(M \cap (F_1\times F_2))\cup M_b$ X是笛卡尔积
+$\mathcal{M}$:所有匹配情况的集合
 
-M':经过优化后的M,和F1*F2没有交集，c-f1和M'的交集是空的
+1. $|\mathcal{M}| = \sum_{i=9}^{min}\frac{min!\times max!}{i!\times (min-i)!\times (max-i)!}$
+2. $M \in \mathcal{M}$
+3. $M^+(C) \in \mathcal{M}$
+4. $M^+(C)$是$\mathcal{M}$中最优的匹配情况，$M^+(C)=(M \cap (F_1\times F_2))\cup M_b$
 
-$|M| = \sum_{i=9}^{min}\frac{min!\times max!}{i!\times (min-i)!\times (max-i)!}$
+M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，c-f1，$M' \cap ((C-F_1))= \varnothing$
+
+### 6.3 Randomly refinement excluding $C − F_1$
+
+#### lemma 1 
+对于任意的$G_1中C_1和G_2中C_2$，如果$C_1\subseteq C_2$，则$score(M^+(C_1)) \ge score(M^+(C_2))$
+
+```
+Algorithm 5 select-random-cover (G)
+Require: a graph G;
+Ensure: a randomly selected minimal cover of G;
+
+1: L ← shuffled nodes in V (G); C ← ∅;
+2: for all u ∈ L do
+3: if ∃(u, v) ∈ E(G), s.t. v /∈ C then C ← C ∪ {u};
+4: for all u ∈ C do
+5: if C − {u} is a vertex cover of G then C ← C − {u};
+6: return C;
+```
+
+
+
+
 
 ## 7 Labeled graph handling
