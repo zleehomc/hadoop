@@ -153,9 +153,10 @@ $\mathcal{M}$:所有匹配情况的集合
 3. $M^+(C) \in \mathcal{M}$
 4. $M^+(C)$是$\mathcal{M}$中最优的匹配情况，$M^+(C)=(M \cap (F_1\times F_2))\cup M_b$
 
-M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，c-f1，$M' \cap ((C-F_1))= \varnothing$
+M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，$M' \cap ((C-F_1))= \varnothing$
 
 ### 6.3 Randomly refinement excluding $C − F_1$
+寻找最小的C
 
 #### lemma 1 
 对于任意的$G_1中C_1和G_2中C_2$，如果$C_1\subseteq C_2$，则$score(M^+(C_1)) \ge score(M^+(C_2))$
