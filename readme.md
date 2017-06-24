@@ -153,7 +153,7 @@ $\mathcal{M}$:所有匹配情况的集合
 3. $M^+(C) \in \mathcal{M}$
 4. $M^+(C)$是$\mathcal{M}$中最优的匹配情况，$M^+(C)=(M \cap (F_1\times F_2))\cup M_b$
 
-M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，$M' \cap ((C-F_1))= \varnothing$
+M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，$M' \cap ((C-F_1))= \emptyset $
 
 ### 6.3 Randomly refinement excluding $C − F_1$
 寻找最小的C
