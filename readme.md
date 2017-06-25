@@ -158,7 +158,7 @@ M':属于$\mathcal{M}$且$M' \cap (F_1\times F_2)$，$M' \cap ((C-F_1))= \emptys
 ### 6.3 Randomly refinement excluding $C − F_1$
 寻找最小的C
 
-#### lemma 1 
+#### Lemma 1 
 对于任意的$G_1中C_1和G_2中C_2$，如果$C_1\subseteq C_2$，则$score(M^+(C_1)) \ge score(M^+(C_2))$
 
 ```
@@ -173,6 +173,45 @@ Ensure: a randomly selected minimal cover of G;
 5: if C − {u} is a vertex cover of G then C ← C − {u};
 6: return C;
 ```
+时间复杂度$O(|E(G)|)$
+
+#### Lemma 2
+对于图G的任意的极小覆盖C，至少有$|C|!\times |V(G)-C|!种排列组合可以生成C
+```
+Algorithm 6 refine (G1, G2, M)
+Require: two graphs G1 and G2, and the matching M;
+Ensure: a refined matching M;
+
+1: while M is updated or it is the first iteration do
+2: for i = 1 to X do
+3: G ← random selection between G1 and G2;
+4: C ← select-random-cover (G);
+5: compute M+(C);
+6: if score(M+(C)) > score(M) then M ← M+(C);
+7: return M;
+```
+时间复杂度$O(m·n^3)$，$m=min{|E(G_1)|,|E(G_)|} and n=max{|V(G_1)|,|V(G_2)|}$
+
+### 6.4 Randomly refinement including C − F1
+
+$G^*_b$:二分匹配，一边是$V(G_1)-F_1$,另一边是$V(G_2)-F_2$
+
+$M^*_b$:$G^*_b$的最大加权二分匹配
+
+$M^*(F_1)$:上述的新匹配，$M^∗(F_1)=(M \cap (F_1 \times F_2)) \cup M^∗$
+
+$\mathcal{M^*}$:新的匹配空间
+
+$M'$:满足
+
+1. $M' \cap (F1 \times F2) = M \cap (F1 \times F2)$
+2. $F_1 ∪ (V(G_1) − P1 − M'^{−1}[V(G_2) − P_2])$ is a vertex
+cover of $G_1$
+
+$\mathcal{M}$ \subseteq $\mathcal{M^*}$ ，假设$M^*_{\mathcal{M}}$ 是最优匹配在$\mathcal{M^*}$中，我们一定有$score(M^*(F_1))\ge score(M^*_{\mathcal{M}}) \ge score(M^+(C))$
+
+
+
 
 
 
