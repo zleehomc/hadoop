@@ -210,6 +210,7 @@ cover of $G_1$
 
 
 $\mathcal M \subseteq \mathcal M^\ast$,假设$M^{\ast}_\mathcal{M}$是最优匹配在$\mathcal{M^\ast}$中,
+
 我们一定有$score(M^{\ast}(F_1)) \ge score(M^{\ast}_{\mathcal{M}}) \ge score(M^+(C))$
 
 
