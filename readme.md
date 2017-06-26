@@ -196,10 +196,7 @@ Ensure: a refined matching M;
 
 $G^*_b$:二分匹配，一边是$V(G_1)-F_1$,另一边是$V(G_2)-F_2$
 
-($M^*_b$):
-
-
-他是$G^*_b$的最大加权二分匹配
+($M^*_b$):他是上述中的最大加权二分匹配
 
 $M^*(F_1)$:上述的新匹配，$M^∗(F_1)=(M \cap (F_1 \times F_2)) \cup M^∗$
 
@@ -212,7 +209,10 @@ $M'$:满足
 cover of $G_1$
 
 
-$\mathcal M \subseteq \mathcal M^*$,假设$M^*_{\mathcal{M}}$是最优匹配在$\mathcal{M^*}$中，我们一定有$score(M^*(F_1))\ge score(M^*_{\mathcal{M}}) \ge score(M^+(C))$
+$\mathcal M \subseteq \mathcal M^*$,
+假设$M^*_{\mathcal{M}}$
+是最优匹配在$\mathcal{M^*}$中，
+我们一定有$score(M^*(F_1))\ge score(M^*_{\mathcal{M}}) \ge score(M^+(C))$
 
 
 
