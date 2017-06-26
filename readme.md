@@ -208,9 +208,7 @@ $M'$:满足
 2. $F_1 ∪ (V(G_1) − P1 − M'^{−1}[V(G_2) − P_2])$ is a vertex
 cover of $G_1$
 
-$\mathcal{M} \subseteq \mathcal{M^*}$，
-
-假设$M^*_{\mathcal{M}}$ 是最优匹配在$\mathcal{M^*}$中，我们一定有$score(M^*(F_1))\ge score(M^*_{\mathcal{M}}) \ge score(M^+(C))$
+$\mathcal{M} \subseteq {\mathcal{M^*}}$，假设$M^*_{\mathcal{M}}$ 是最优匹配在$\mathcal{M^*}$中，我们一定有$score(M^*(F_1))\ge score(M^*_{\mathcal{M}}) \ge score(M^+(C))$
 
 
 
